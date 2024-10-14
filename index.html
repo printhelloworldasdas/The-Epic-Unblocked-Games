@@ -7,8 +7,6 @@
     
     <!-- Link to the favicon -->
     <link rel="icon" href="https://example.com/path/to/your/favicon.ico" type="image/x-icon">
-    <!-- Alternatively, for .png format -->
-    <!-- <link rel="icon" href="https://example.com/path/to/your/favicon.png" type="image/png"> -->
 
     <style>
         body {
@@ -18,9 +16,10 @@
             justify-content: center;
             margin: 0;
             background-color: #f0f0f0;
+            text-align: center;
         }
         img {
-            width: 200px; /* Adjust image size */
+            width: 200px; /* Ajustar tamaño de la imagen */
             margin-bottom: 10px;
         }
         .game {
@@ -49,6 +48,29 @@
             font-size: 14px;
             color: #333;
         }
+        /* Styles for the iframe */
+        #gameFrame {
+            width: 800px; /* Ajustar ancho según sea necesario */
+            height: 600px; /* Ajustar altura según sea necesario */
+            border: 1px solid #ccc;
+            display: none; /* Oculto por defecto */
+        }
+        #fullscreenButton {
+            margin: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #fullscreenButton:hover {
+            background-color: #0056b3;
+        }
+        .hidden {
+            display: none; /* Clase para ocultar elementos */
+        }
     </style>
 </head>
 <body>
@@ -61,34 +83,55 @@
     <div class="game-container" id="gameList">
         <!-- Tube Jumpers -->
         <div class="game">
-            <a href="games/tubejumpers/index.html">
-                <img src="games/tubejumpers/img/icon.jpg" alt="Tube Jumpers">
+            <a href="#" onclick="loadGame('games/tubejumpers/index.html')">
+                <img src="games/tubejumpers/img/icon.jpg" alt="Tube Jumpers" width="150">
                 <p class="game-name">Tube Jumpers</p>
                 <p class="description">An offline game for 2 to 4 players where you compete on floating tubes, trying to stay on while avoiding obstacles. Perfect for quick and fun local matches with friends!</p>
             </a>
         </div>
-        <!-- More games can be added here -->
+        <!-- Más juegos se pueden agregar aquí -->
     </div>
+
+    <!-- Iframe for the selected game -->
+    <iframe id="gameFrame" src="" frameborder="0"></iframe>
+    <button id="fullscreenButton" style="display: none;" onclick="toggleFullScreen()">Full Screen</button>
 
     <script>
         function filterGames() {
-            // Get the search query and convert it to lowercase
             let query = document.getElementById('searchBar').value.toLowerCase();
-            
-            // Get all game elements
             let games = document.getElementsByClassName('game');
             
-            // Loop through all games and hide those that don't match the query
             for (let i = 0; i < games.length; i++) {
                 let gameName = games[i].getElementsByClassName('game-name')[0].innerText.toLowerCase();
                 let gameDescription = games[i].getElementsByClassName('description')[0].innerText.toLowerCase();
                 
-                // Show game if the name or description matches the query
                 if (gameName.includes(query) || gameDescription.includes(query)) {
-                    games[i].style.display = "block"; // Show the game
+                    games[i].style.display = "block";
                 } else {
-                    games[i].style.display = "none";  // Hide the game
+                    games[i].style.display = "none";
                 }
+            }
+        }
+
+        function loadGame(url) {
+            // Ocultar la lista de juegos y el cuadro de búsqueda
+            document.getElementById('searchBar').classList.add('hidden');
+            document.getElementById('gameList').classList.add('hidden');
+
+            // Cargar el juego en el iframe
+            document.getElementById('gameFrame').src = url;
+            document.getElementById('gameFrame').style.display = 'block';
+            document.getElementById('fullscreenButton').style.display = 'inline-block';
+        }
+
+        function toggleFullScreen() {
+            const frame = document.getElementById('gameFrame');
+            if (!document.fullscreenElement) {
+                frame.requestFullscreen().catch(err => {
+                    alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+                });
+            } else {
+                document.exitFullscreen();
             }
         }
     </script>
