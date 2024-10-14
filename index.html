@@ -51,6 +51,7 @@
         .description {
             font-size: 14px;
             color: #ccc; /* Color del texto de la descripción */
+            display: none; /* Oculto por defecto */
         }
         /* Styles for the iframe */
         #gameFrame {
@@ -129,12 +130,16 @@
             
             for (let i = 0; i < games.length; i++) {
                 let gameName = games[i].getElementsByClassName('game-name')[0].innerText.toLowerCase();
-                let gameDescription = games[i].getElementsByClassName('description')[0].innerText.toLowerCase();
-                
-                if (gameName.includes(query) || gameDescription.includes(query)) {
+                let gameDescription = games[i].getElementsByClassName('description')[0];
+                let descriptionText = gameDescription.innerText.toLowerCase();
+
+                // Verificar si hay coincidencias
+                if (gameName.includes(query) || descriptionText.includes(query)) {
                     games[i].style.display = "block";
+                    gameDescription.style.display = "block"; // Mostrar la descripción
                 } else {
                     games[i].style.display = "none";
+                    gameDescription.style.display = "none"; // Ocultar la descripción
                 }
             }
         }
