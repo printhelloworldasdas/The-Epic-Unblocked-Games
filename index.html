@@ -6,7 +6,7 @@
     <title>The Epic Unblocked Games</title>
     
     <!-- Link to the favicon -->
-    <link rel="icon" href="https://example.com/path/to/your/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="https://static.wikia.nocookie.net/find-the-epic-faces-official/images/e/e6/Site-logo.png/revision/latest?cb=20231018200622" type="image/x-icon">
 
     <style>
         body {
@@ -15,8 +15,10 @@
             align-items: center;
             justify-content: center;
             margin: 0;
-            background-color: #f0f0f0;
+            background-color: #2C2C2C; /* Color de fondo entre gris y negro */
             text-align: center;
+            color: white; /* Color del texto */
+            position: relative; /* Para permitir posicionar elementos dentro */
         }
         img {
             width: 200px; /* Ajustar tamaño de la imagen */
@@ -46,7 +48,7 @@
         }
         .description {
             font-size: 14px;
-            color: #333;
+            color: #ccc; /* Color del texto de la descripción */
         }
         /* Styles for the iframe */
         #gameFrame {
@@ -71,11 +73,34 @@
         .hidden {
             display: none; /* Clase para ocultar elementos */
         }
+        .header {
+            position: absolute; /* Para posicionar en la parte superior izquierda */
+            top: 10px;
+            left: 10px;
+            text-align: left; /* Alinear a la izquierda */
+        }
+        #backButton {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #FF5733; /* Color del botón de volver */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: none; /* Oculto por defecto */
+        }
+        #backButton:hover {
+            background-color: #c70039; /* Color de hover del botón de volver */
+        }
     </style>
 </head>
 <body>
+    <div class="header">
+        <h1>The Epic Unblocked Games</h1>
+    </div>
+
     <img src="logo.png" alt="Epic Face Logo">
-    <h1>The Epic Unblocked Games</h1>
 
     <!-- Search Bar -->
     <input type="text" id="searchBar" placeholder="Search for a game..." onkeyup="filterGames()">
@@ -95,6 +120,7 @@
     <!-- Iframe for the selected game -->
     <iframe id="gameFrame" src="" frameborder="0"></iframe>
     <button id="fullscreenButton" style="display: none;" onclick="toggleFullScreen()">Full Screen</button>
+    <button id="backButton" onclick="goBack()">Back to Game Selection</button>
 
     <script>
         function filterGames() {
@@ -122,6 +148,7 @@
             document.getElementById('gameFrame').src = url;
             document.getElementById('gameFrame').style.display = 'block';
             document.getElementById('fullscreenButton').style.display = 'inline-block';
+            document.getElementById('backButton').style.display = 'inline-block'; // Mostrar botón de volver
         }
 
         function toggleFullScreen() {
@@ -133,6 +160,16 @@
             } else {
                 document.exitFullscreen();
             }
+        }
+
+        function goBack() {
+            // Ocultar el iframe y el botón de pantalla completa
+            document.getElementById('gameFrame').style.display = 'none';
+            document.getElementById('fullscreenButton').style.display = 'none';
+            document.getElementById('backButton').style.display = 'none'; // Ocultar botón de volver
+            // Mostrar la lista de juegos y el cuadro de búsqueda
+            document.getElementById('searchBar').classList.remove('hidden');
+            document.getElementById('gameList').classList.remove('hidden');
         }
     </script>
 </body>
