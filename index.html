@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Epic Unblocked Games</title>
-    
+
     <!-- Link to the favicon -->
     <link rel="icon" href="https://static.wikia.nocookie.net/find-the-epic-faces-official/images/e/e6/Site-logo.png/revision/latest?cb=20231018200622" type="image/x-icon">
+
+    <!-- Link to Google Fonts for rounded font -->
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 
     <style>
         body {
@@ -19,6 +22,7 @@
             text-align: center;
             color: white; /* Color del texto */
             position: relative; /* Para permitir posicionar elementos dentro */
+            font-family: 'Quicksand', sans-serif; /* Usar fuente redondeada */
         }
         .game {
             text-align: center;
@@ -44,6 +48,7 @@
             background-color: #333; /* Color del fondo de la barra de búsqueda */
             border: none;
             color: white; /* Color del texto de la barra de búsqueda */
+            font-family: 'Quicksand', sans-serif; /* Usar fuente redondeada */
         }
         #searchBar::placeholder {
             color: #aaa; /* Color del placeholder */
@@ -69,6 +74,7 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-family: 'Quicksand', sans-serif; /* Usar fuente redondeada */
         }
         #fullscreenButton:hover {
             background-color: #0056b3;
@@ -92,6 +98,7 @@
             border-radius: 5px;
             cursor: pointer;
             display: none; /* Oculto por defecto */
+            font-family: 'Quicksand', sans-serif; /* Usar fuente redondeada */
         }
         #backButton:hover {
             background-color: #c70039; /* Color de hover del botón de volver */
@@ -127,7 +134,7 @@
         function filterGames() {
             let query = document.getElementById('searchBar').value.toLowerCase();
             let games = document.getElementsByClassName('game');
-            
+
             for (let i = 0; i < games.length; i++) {
                 let gameName = games[i].getElementsByClassName('game-name')[0].innerText.toLowerCase();
                 let gameDescription = games[i].getElementsByClassName('description')[0];
