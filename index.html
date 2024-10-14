@@ -134,10 +134,16 @@
                 let descriptionText = gameDescription.innerText.toLowerCase();
 
                 // Verificar si hay coincidencias
-                if (gameName.includes(query) || descriptionText.includes(query)) {
+                if (query === "") {
+                    // Cuando la barra de búsqueda está vacía, mostrar el juego sin la descripción
+                    games[i].style.display = "block";
+                    gameDescription.style.display = "none"; // Ocultar la descripción
+                } else if (gameName.includes(query) || descriptionText.includes(query)) {
+                    // Mostrar el juego y la descripción si hay coincidencias
                     games[i].style.display = "block";
                     gameDescription.style.display = "block"; // Mostrar la descripción
                 } else {
+                    // Si no hay coincidencias, ocultar el juego
                     games[i].style.display = "none";
                     gameDescription.style.display = "none"; // Ocultar la descripción
                 }
