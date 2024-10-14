@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juegos Desbloqueados</title>
+    <title>The Epic Unblocked Games</title>
     <style>
         body {
             display: flex;
@@ -14,12 +14,13 @@
             background-color: #f0f0f0;
         }
         img {
-            width: 200px; /* Ajusta el tamaño según tus imágenes */
+            width: 200px; /* Adjust image size */
             margin-bottom: 10px;
         }
         .game {
             text-align: center;
             margin: 20px;
+            display: inline-block;
         }
         a {
             text-decoration: none;
@@ -33,31 +34,72 @@
             flex-wrap: wrap;
             justify-content: center;
         }
+        #searchBar {
+            margin: 20px;
+            padding: 10px;
+            width: 300px;
+        }
+        .description {
+            font-size: 14px;
+            color: #333;
+        }
     </style>
 </head>
 <body>
-    <img src="logo.png" alt="Logo de Juegos Desbloqueados">
-    <h1>Bienvenido a Juegos Desbloqueados</h1>
-    <div class="game-container">
+    <img src="logo.png" alt="Epic Face Logo">
+    <h1>The Epic Unblocked Games</h1>
+
+    <!-- Search Bar -->
+    <input type="text" id="searchBar" placeholder="Search for a game..." onkeyup="filterGames()">
+
+    <div class="game-container" id="gameList">
+        <!-- Tube Jumpers -->
         <div class="game">
-            <a href="games/juego1/index.html">
-                <img src="games/juego1/imagen.png" alt="Juego 1">
-                <p>Juego 1</p>
+            <a href="games/tubejumpers/index.html">
+                <img src="games/tubejumpers/imagen.png" alt="Tube Jumpers">
+                <p class="game-name">Tube Jumpers</p>
+                <p class="description">A fun multiplayer game where you try to stay on floating tubes while avoiding obstacles.</p>
             </a>
         </div>
+        <!-- More games can be added here -->
         <div class="game">
             <a href="games/juego2/index.html">
                 <img src="games/juego2/imagen.png" alt="Juego 2">
-                <p>Juego 2</p>
+                <p class="game-name">Juego 2</p>
+                <p class="description">Description for game 2 goes here.</p>
             </a>
         </div>
         <div class="game">
             <a href="games/juego3/index.html">
                 <img src="games/juego3/imagen.png" alt="Juego 3">
-                <p>Juego 3</p>
+                <p class="game-name">Juego 3</p>
+                <p class="description">Description for game 3 goes here.</p>
             </a>
         </div>
-        <!-- Agrega más juegos aquí -->
+        <!-- Add more games with similar structure -->
     </div>
+
+    <script>
+        function filterGames() {
+            // Get the search query and convert it to lowercase
+            let query = document.getElementById('searchBar').value.toLowerCase();
+            
+            // Get all game elements
+            let games = document.getElementsByClassName('game');
+            
+            // Loop through all games and hide those that don't match the query
+            for (let i = 0; i < games.length; i++) {
+                let gameName = games[i].getElementsByClassName('game-name')[0].innerText.toLowerCase();
+                let gameDescription = games[i].getElementsByClassName('description')[0].innerText.toLowerCase();
+                
+                // Show game if the name or description matches the query
+                if (gameName.includes(query) || gameDescription.includes(query)) {
+                    games[i].style.display = "block"; // Show the game
+                } else {
+                    games[i].style.display = "none";  // Hide the game
+                }
+            }
+        }
+    </script>
 </body>
 </html>
