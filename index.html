@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Epic Unblocked Games</title>
-
+    
     <!-- Link to the favicon -->
     <link rel="icon" href="https://static.wikia.nocookie.net/find-the-epic-faces-official/images/e/e6/Site-logo.png/revision/latest?cb=20231018200622" type="image/x-icon">
-
+    
     <!-- Link to Google Fonts for rounded font -->
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet"> 
 
     <style>
         body {
@@ -96,7 +96,7 @@
             width: 200px; /* Ancho aumentado */
             height: 40px; /* Altura uniforme */
             position: relative; /* Para ajustar la posición */
-            left: -20px; /* Mover hacia la izquierda */
+            left: -50px; /* Mover hacia la izquierda */
         }
         #backButton:hover {
             background-color: #C74A2A; /* Color de hover del botón de volver */
@@ -153,11 +153,11 @@
                 <p class="description">An offline game for 2 to 4 players where you compete on floating tubes, trying to stay on while avoiding obstacles. Perfect for quick and fun local matches with friends!</p>
             </a>
         </div>
-
+        
         <!-- Basket Random -->
         <div class="game" data-categories="sports 2 players">
             <a href="#" onclick="loadGame('games/basketrandom/index.html')">
-                <img src="games/basketrandom/splash.jpeg" alt="Basket Random" width="150">
+                <img src="games/basketrandom/img/icon.jpg" alt="Basket Random" width="150">
                 <p class="game-name">Basket Random</p>
                 <p class="description">A fun and chaotic basketball game where you control characters to shoot hoops. Perfect for casual play with friends!</p>
             </a>
@@ -190,10 +190,10 @@
                 let matchesCategory = (selectedCategory === "" || gameCategories.includes(selectedCategory));
 
                 if (matchesQuery && matchesCategory) {
-                    games[i].style.display = "block";
+                    games[i].style.display = "inline-block"; // Mostrar el juego como bloque en línea
                     gameDescription.style.display = query === "" ? "none" : "block"; // Mostrar/ocultar descripción según la búsqueda
                 } else {
-                    games[i].style.display = "none";
+                    games[i].style.display = "none"; // Ocultar el juego
                     gameDescription.style.display = "none"; // Ocultar la descripción
                 }
             }
