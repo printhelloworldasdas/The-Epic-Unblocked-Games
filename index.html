@@ -169,9 +169,9 @@
 
         function loadGame(url) {
             // Ocultar la cabecera, la lista de juegos y el cuadro de búsqueda
-            document.getElementById('header').style.display = 'none'; // Ocultar el título
-            document.getElementById('searchBar').classList.add('hidden');
+            document.getElementById('header').style.display = 'none';
             document.getElementById('gameList').classList.add('hidden');
+            document.getElementById('searchBar').classList.add('hidden');
 
             // Cargar el juego en el iframe
             document.getElementById('gameFrame').src = url;
