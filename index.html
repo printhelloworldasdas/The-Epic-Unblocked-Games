@@ -96,7 +96,7 @@
             width: 200px; /* Ancho aumentado */
             height: 40px; /* Altura uniforme */
             position: relative; /* Para ajustar la posición */
-            left: -20px; /* Mover hacia la izquierda */
+            left: -50px; /* Mover hacia la izquierda */
         }
         #backButton:hover {
             background-color: #C74A2A; /* Color de hover del botón de volver */
@@ -129,7 +129,7 @@
     </div>
 
     <!-- Category Filter -->
-    <div class="category-filter">
+    <div class="category-filter" id="categoryFilterContainer">
         <label for="categoryFilter">Select Category:</label>
         <select id="categoryFilter" onchange="filterGames()">
             <option value="">All Categories</option>
@@ -157,7 +157,7 @@
         <!-- Basket Random -->
         <div class="game" data-categories="sports 2 players">
             <a href="#" onclick="loadGame('games/basketrandom/index.html')">
-                <img src="games/basketrandom/splash.jpeg" alt="Basket Random" width="150">
+                <img src="games/basketrandom/img/icon.jpg" alt="Basket Random" width="150">
                 <p class="game-name">Basket Random</p>
                 <p class="description">A fun and chaotic basketball game where you control characters to shoot hoops. Perfect for casual play with friends!</p>
             </a>
@@ -204,7 +204,7 @@
             document.getElementById('gameFrame').src = url; // Cargar el juego
             document.querySelector('.header').style.display = "none"; // Ocultar el título
             document.getElementById('searchBar').style.display = "none"; // Ocultar la barra de búsqueda
-            document.getElementById('categoryFilter').style.display = "none"; // Ocultar el filtro de categorías
+            document.getElementById('categoryFilterContainer').style.display = "none"; // Ocultar el filtro de categorías
             document.getElementById('fullscreenButton').style.display = "block"; // Mostrar el botón de pantalla completa
             document.getElementById('backButton').style.display = "block"; // Mostrar el botón de volver
             document.querySelector('.controls').style.display = "block"; // Mostrar controles
@@ -226,7 +226,7 @@
             document.getElementById('gameFrame').style.display = "none"; // Ocultar el iframe
             document.querySelector('.header').style.display = "block"; // Mostrar el título
             document.getElementById('searchBar').style.display = "block"; // Mostrar la barra de búsqueda
-            document.getElementById('categoryFilter').style.display = "block"; // Mostrar el filtro de categorías
+            document.getElementById('categoryFilterContainer').style.display = "block"; // Mostrar el filtro de categorías
             document.getElementById('fullscreenButton').style.display = "none"; // Ocultar el botón de pantalla completa
             document.getElementById('backButton').style.display = "none"; // Ocultar el botón de volver
             document.querySelector('.controls').style.display = "none"; // Ocultar controles
