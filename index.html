@@ -144,7 +144,7 @@
         function filterGames() {
             let query = document.getElementById('searchBar').value.toLowerCase();
             let games = document.getElementsByClassName('game');
-            
+
             for (let i = 0; i < games.length; i++) {
                 let gameName = games[i].getElementsByClassName('game-name')[0].innerText.toLowerCase();
                 let gameDescription = games[i].getElementsByClassName('description')[0];
