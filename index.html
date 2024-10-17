@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Epic Unblocked Games</title>
-
+    
     <!-- Link to the favicon -->
     <link rel="icon" href="https://static.wikia.nocookie.net/find-the-epic-faces-official/images/e/e6/Site-logo.png/revision/latest?cb=20231018200622" type="image/x-icon">
-
+    
     <!-- Link to Google Fonts for rounded font -->
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet"> 
 
     <style>
         body {
@@ -138,7 +138,8 @@
             <option value="2,3,4 Players">2,3,4 Players</option>
             <option value="action">Action</option>
             <option value="racing">Racing</option>
-            <!-- Agregar más categorías aquí -->
+            <option value="hard games">Hard Games</option> <!-- Nueva categoría -->
+            <option value="1 player">1 Player</option> <!-- Nueva categoría -->
         </select>
     </div>
 
@@ -154,7 +155,7 @@
                 <p class="description">An offline game for 2 to 4 players where you compete on floating tubes, trying to stay on while avoiding obstacles. Perfect for quick and fun local matches with friends!</p>
             </a>
         </div>
-
+        
         <!-- Basket Random -->
         <div class="game" data-categories="sports 2 players">
             <a href="#" onclick="loadGame('games/basketrandom/index.html')">
@@ -173,14 +174,14 @@
             </a>
         </div>
 
-       <!-- Volley Random -->
-       <div class="game" data-categories="sports 2 players">
-           <a href="#" onclick="loadGame('games/volleyrandom/index.html')">
-               <img src="games/volleyrandom/splash.png" alt="Volley Random" width="150">
-               <p class="game-name">Volley Random</p>
-               <p class="description">Enjoy a fun volleyball game where you can compete with friends. Perfect for 2 players!</p>
-           </a>
-       </div>
+        <!-- World's Hardest Game 2 -->
+        <div class="game" data-categories="hard games 1 player action">
+            <a href="#" onclick="loadGame('games/worldshardestgame2/index.html')">
+                <img src="games/worldshardestgame2/icon.jpg" alt="World's Hardest Game 2" width="150">
+                <p class="game-name">World's Hardest Game 2</p>
+                <p class="description">The sequel to the notorious challenge. Dodge obstacles and collect items in one of the toughest games ever made. Can you beat it?</p>
+            </a>
+        </div>
     </div>
 
     <!-- Iframe for Game -->
@@ -199,57 +200,49 @@
             let games = document.getElementsByClassName('game');
 
             for (let i = 0; i < games.length; i++) {
-                let gameName = games[i].getElementsByClassName('game-name')[0].innerText.toLowerCase();
-                let gameDescription = games[i].getElementsByClassName('description')[0];
-                let descriptionText = gameDescription.innerText.toLowerCase();
-                let gameCategories = games[i].getAttribute('data-categories').toLowerCase();
+                let game = games[i];
+                let gameName = game.getElementsByClassName('game-name')[0].textContent.toLowerCase();
+                let gameCategories = game.getAttribute('data-categories').toLowerCase();
 
-                // Verificar si hay coincidencias
-                let matchesQuery = (query === "" || gameName.includes(query) || descriptionText.includes(query));
-                let matchesCategory = (selectedCategory === "" || gameCategories.includes(selectedCategory));
-
-                if (matchesQuery && matchesCategory) {
-                    games[i].style.display = "inline-block"; // Mostrar el juego como bloque en línea
-                    gameDescription.style.display = query === "" ? "none" : "block"; // Mostrar/ocultar descripción según la búsqueda
+                if ((gameName.includes(query) || query === '') && (gameCategories.includes(selectedCategory) || selectedCategory === '')) {
+                    game.style.display = 'inline-block';
                 } else {
-                    games[i].style.display = "none"; // Ocultar el juego
-                    gameDescription.style.display = "none"; // Ocultar la descripción
+                    game.style.display = 'none';
                 }
             }
         }
 
-        function loadGame(url) {
-            document.getElementById('gameFrame').style.display = "block"; // Mostrar el iframe
-            document.getElementById('gameFrame').src = url; // Cargar el juego
-            document.querySelector('.header').style.display = "none"; // Ocultar el título
-            document.getElementById('searchBar').style.display = "none"; // Ocultar la barra de búsqueda
-            document.getElementById('categoryFilterContainer').style.display = "none"; // Ocultar el filtro de categorías
-            document.getElementById('fullscreenButton').style.display = "block"; // Mostrar el botón de pantalla completa
-            document.getElementById('backButton').style.display = "block"; // Mostrar el botón de volver
-            document.querySelector('.controls').style.display = "block"; // Mostrar controles
-            document.querySelector('.game-container').style.display = "none"; // Ocultar la lista de juegos
-        }
-
-        function toggleFullScreen() {
-            let gameFrame = document.getElementById('gameFrame');
-            if (gameFrame.requestFullscreen) {
-                gameFrame.requestFullscreen();
-            } else if (gameFrame.webkitRequestFullscreen) { // Safari
-                gameFrame.webkitRequestFullscreen();
-            } else if (gameFrame.msRequestFullscreen) { // IE11
-                gameFrame.msRequestFullscreen();
-            }
+        function loadGame(gameUrl) {
+            document.getElementById('gameFrame').src = gameUrl;
+            document.getElementById('gameFrame').style.display = 'block';
+            document.getElementById('fullscreenButton').style.display = 'inline-block';
+            document.getElementById('backButton').style.display = 'inline-block';
+            document.getElementById('gameList').style.display = 'none'; // Hide game list
+            document.getElementById('categoryFilterContainer').style.display = 'none'; // Hide category filter
+            document.getElementById('searchBar').style.display = 'none'; // Hide search bar
         }
 
         function goBack() {
-            document.getElementById('gameFrame').style.display = "none"; // Ocultar el iframe
-            document.querySelector('.header').style.display = "block"; // Mostrar el título
-            document.getElementById('searchBar').style.display = "block"; // Mostrar la barra de búsqueda
-            document.getElementById('categoryFilterContainer').style.display = "block"; // Mostrar el filtro de categorías
-            document.getElementById('fullscreenButton').style.display = "none"; // Ocultar el botón de pantalla completa
-            document.getElementById('backButton').style.display = "none"; // Ocultar el botón de volver
-            document.querySelector('.controls').style.display = "none"; // Ocultar controles
-            document.querySelector('.game-container').style.display = "block"; // Mostrar la lista de juegos
+            document.getElementById('gameFrame').src = '';
+            document.getElementById('gameFrame').style.display = 'none';
+            document.getElementById('fullscreenButton').style.display = 'none';
+            document.getElementById('backButton').style.display = 'none';
+            document.getElementById('gameList').style.display = 'flex'; // Show game list again
+            document.getElementById('categoryFilterContainer').style.display = 'block'; // Show category filter
+            document.getElementById('searchBar').style.display = 'block'; // Show search bar
+        }
+
+        function toggleFullScreen() {
+            let iframe = document.getElementById('gameFrame');
+            if (iframe.requestFullscreen) {
+                iframe.requestFullscreen();
+            } else if (iframe.mozRequestFullScreen) {
+                iframe.mozRequestFullScreen();
+            } else if (iframe.webkitRequestFullscreen) {
+                iframe.webkitRequestFullscreen();
+            } else if (iframe.msRequestFullscreen) {
+                iframe.msRequestFullscreen();
+            }
         }
     </script>
 </body>
