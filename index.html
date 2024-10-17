@@ -174,6 +174,15 @@
             </a>
         </div>
 
+        <!-- Volley Random -->
+        <div class="game" data-categories="sports 2 players">
+            <a href="#" onclick="loadGame('games/volleyrandom/index.html')">
+                <img src="games/volleyrandom/512x512.jpg" alt="Volley Random" width="150">
+                <p class="game-name">Volley Random</p>
+                <p class="description">A chaotic and fun volleyball game where the characters and physics are random. Great for quick matches with friends!</p>
+            </a>
+        </div>
+
         <!-- World's Hardest Game 2 -->
         <div class="game" data-categories="hard games 1 player action">
             <a href="#" onclick="loadGame('games/worldshardestgame2/index.html')">
@@ -187,11 +196,11 @@
     <!-- Iframe for Game -->
     <iframe id="gameFrame" src="" frameborder="0"></iframe>
 
-    <!-- Controls below the iframe -->
-    <div class="controls">
-        <button id="fullscreenButton" onclick="toggleFullScreen()">Full Screen</button>
-        <button id="backButton" onclick="goBack()">Back to Games</button>
-    </div>
+    <!-- Fullscreen Button -->
+    <button id="fullscreenButton" onclick="toggleFullScreen()">Go Fullscreen</button>
+
+    <!-- Back Button -->
+    <button id="backButton" onclick="goBack()">Back to Games</button>
 
     <script>
         function filterGames() {
