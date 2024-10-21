@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Epic Unblocked Games</title>
-    
+
     <!-- Link to the favicon -->
     <link rel="icon" href="https://static.wikia.nocookie.net/find-the-epic-faces-official/images/e/e6/Site-logo.png/revision/latest?cb=20231018200622" type="image/x-icon">
-    
+
     <!-- Link to Google Fonts for rounded font -->
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 
     <style>
         body {
@@ -156,7 +156,7 @@
                 <p class="description">An offline game for 2 to 4 players where you compete on floating tubes, trying to stay on while avoiding obstacles. Perfect for quick and fun local matches with friends!</p>
             </a>
         </div>
-        
+
         <!-- Basket Random -->
         <div class="game" data-categories="sports 2 players">
             <a href="#" onclick="loadGame('games/basketrandom/index.html')">
@@ -196,93 +196,83 @@
         <!-- World's Hardest Game 2 -->
         <div class="game" data-categories="1 player hard games">
             <a href="#" onclick="loadGame('games/worldshardestgame2/index.html')">
-                <img src="games/worldshardestgame2/the-worlds-hardest-game-2.jpg" alt="World's Hardest Game 2" width="150">
+                <img src="games/worldshardestgame2/splash.png" alt="World's Hardest Game 2" width="150">
                 <p class="game-name">World's Hardest Game 2</p>
-                <p class="description">The sequel to the insanely difficult World's Hardest Game. More levels, more challenges!</p>
+                <p class="description">The sequel to the hardest game ever. More levels, more challenges, and even harder than before!</p>
             </a>
         </div>
 
-        <!-- World's Hardest Game 4 -->
-        <div class="game" data-categories="1 player hard games">
-            <a href="#" onclick="loadGame('games/worldshardestgame4/index.html')">
-                <img src="games/worldhardestgame4/logo.jpg" alt="World's Hardest Game 4" width="150">
-                <p class="game-name">World's Hardest Game 4</p>
-                <p class="description">The latest installment in the World's Hardest Game series. More intense mazes and even harder puzzles to solve!</p>
-            </a>
-        </div>
-
+        <!-- More games... -->
     </div>
 
-    <!-- Game Frame -->
     <iframe id="gameFrame"></iframe>
 
-    <!-- Fullscreen Button -->
-    <button id="fullscreenButton" onclick="toggleFullscreen()">Fullscreen</button>
-
-    <!-- Back Button -->
-    <button id="backButton" onclick="goBack()">Back to Menu</button>
+    <div class="controls">
+        <button id="fullscreenButton" onclick="goFullscreen()">Fullscreen Mode</button>
+        <button id="backButton" onclick="closeGame()">Back to Game List</button>
+    </div>
 
     <script>
-        function loadGame(gameUrl) {
-            var gameFrame = document.getElementById('gameFrame');
-            var fullscreenButton = document.getElementById('fullscreenButton');
-            var backButton = document.getElementById('backButton');
-            var gameList = document.getElementById('gameList');
-            var searchBar = document.getElementById('searchBar');
-            var categoryFilter = document.getElementById('categoryFilterContainer');
-
-            gameFrame.src = gameUrl;
-            gameFrame.style.display = 'block';
-            fullscreenButton.style.display = 'inline-block';
-            backButton.style.display = 'inline-block';
-            gameList.style.display = 'none'; 
-            searchBar.style.display = 'none'; 
-            categoryFilter.style.display = 'none'; 
+        // Function to load the selected game into the iframe
+        function loadGame(url) {
+            document.getElementById('gameFrame').src = url;
+            document.getElementById('gameFrame').style.display = 'block';
+            document.querySelector('.controls').style.display = 'block';
+            document.getElementById('gameList').classList.add('hidden');
+            document.getElementById('searchBar').style.display = 'none';
+            document.getElementById('categoryFilterContainer').style.display = 'none';
         }
 
-        function goBack() {
-            var gameFrame = document.getElementById('gameFrame');
-            var fullscreenButton = document.getElementById('fullscreenButton');
-            var backButton = document.getElementById('backButton');
-            var gameList = document.getElementById('gameList');
-            var searchBar = document.getElementById('searchBar');
-            var categoryFilter = document.getElementById('categoryFilterContainer');
-
-            gameFrame.style.display = 'none';
-            fullscreenButton.style.display = 'none';
-            backButton.style.display = 'none';
-            gameList.style.display = 'flex'; 
-            searchBar.style.display = 'block'; 
-            categoryFilter.style.display = 'block'; 
-        }
-
-        function toggleFullscreen() {
-            var gameFrame = document.getElementById('gameFrame');
-            if (!document.fullscreenElement) {
-                gameFrame.requestFullscreen().catch(err => {
-                    alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
-                });
-            } else {
-                document.exitFullscreen();
+        // Function to go fullscreen
+        function goFullscreen() {
+            const iframe = document.getElementById('gameFrame');
+            if (iframe.requestFullscreen) {
+                iframe.requestFullscreen();
+            } else if (iframe.mozRequestFullScreen) {
+                iframe.mozRequestFullScreen(); // Firefox
+            } else if (iframe.webkitRequestFullscreen) {
+                iframe.webkitRequestFullscreen(); // Chrome, Safari and Opera
+            } else if (iframe.msRequestFullscreen) {
+                iframe.msRequestFullscreen(); // IE/Edge
             }
         }
 
+        // Function to close the game and return to the game list
+        function closeGame() {
+            document.getElementById('gameFrame').src = '';
+            document.getElementById('gameFrame').style.display = 'none';
+            document.querySelector('.controls').style.display = 'none';
+            document.getElementById('gameList').classList.remove('hidden');
+            document.getElementById('searchBar').style.display = 'block';
+            document.getElementById('categoryFilterContainer').style.display = 'block';
+        }
+
+        // Function to filter games by search and category
         function filterGames() {
-            var searchInput = document.getElementById('searchBar').value.toLowerCase();
-            var categoryFilter = document.getElementById('categoryFilter').value.toLowerCase();
-            var games = document.getElementsByClassName('game');
+            const searchValue = document.getElementById('searchBar').value.toLowerCase();
+            const categoryValue = document.getElementById('categoryFilter').value;
+            const games = document.querySelectorAll('.game');
 
-            for (var i = 0; i < games.length; i++) {
-                var gameName = games[i].getElementsByClassName('game-name')[0].innerText.toLowerCase();
-                var gameCategories = games[i].getAttribute('data-categories').toLowerCase();
+            games.forEach(game => {
+                const gameName = game.querySelector('.game-name').textContent.toLowerCase();
+                const description = game.querySelector('.description').textContent.toLowerCase();
+                const categories = game.getAttribute('data-categories');
 
-                if ((gameName.includes(searchInput) || searchInput === "") &&
-                    (gameCategories.includes(categoryFilter) || categoryFilter === "")) {
-                    games[i].style.display = "inline-block";
+                const matchesSearch = gameName.includes(searchValue) || description.includes(searchValue);
+                const matchesCategory = categoryValue === '' || categories.includes(categoryValue);
+
+                if (matchesSearch && matchesCategory) {
+                    game.style.display = 'inline-block';
+                    // Show description only if search or category filter is active
+                    if (searchValue || categoryValue) {
+                        game.querySelector('.description').style.display = 'block';
+                    } else {
+                        game.querySelector('.description').style.display = 'none';
+                    }
                 } else {
-                    games[i].style.display = "none";
+                    game.style.display = 'none';
                 }
-            }
+            });
         }
     </script>
 </body>
